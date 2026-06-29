@@ -1,0 +1,10 @@
+:queues:
+  - default
+
+:scheduler:
+  :listened_queues_only: true
+
+schedule:
+  price_refresh:
+    cron: '*/15 * * * *'
+    class: PriceRefreshWorker
