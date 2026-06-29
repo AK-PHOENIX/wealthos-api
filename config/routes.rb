@@ -1,4 +1,6 @@
+require_relative "../app/api/base"
+
 Rails.application.routes.draw do
   devise_for :users
-  mount BaseAPI => '/'
+  mount API::Base => '/'
 end
