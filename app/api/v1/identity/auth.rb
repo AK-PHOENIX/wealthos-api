@@ -18,6 +18,7 @@ module API
               name: params[:name],
               monthly_income: params[:monthly_income]
             )
+            user.portfolios.create!(name: "Main Portfolio")
             token = Warden::JWTAuth::UserEncoder.new.call(user, :user, nil).first
             { token: token, user: { id: user.id, name: user.name, email: user.email } }
           end

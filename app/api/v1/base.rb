@@ -11,6 +11,15 @@ module API
     class Base < Grape::API
       API_VERSION = 'v1'
 
+      helpers do
+        def current_user
+          @current_user ||= env['warden'].authenticate(scope: :user)
+        end
+
+        def authenticate!
+          error!('Unauthorized', 401) unless current_user
+        end
+      end
 
       format :json
       content_type :json, 'application/json'
