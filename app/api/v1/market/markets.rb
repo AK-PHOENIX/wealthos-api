@@ -35,7 +35,7 @@ module API
 
             begin
               last_updated = PriceCache.where(asset_type: 'crypto').maximum(:updated_at)
-              if last_updated.nil? || last_updated < 15.minutes.ago
+              if last_updated.nil? || last_updated < 1.minutes.ago
                 cg_ids = crypto_assets.values.map { |a| a[:cg_id] }.join(',')
                 response = HTTParty.get(
                   "#{ENV['COINGECKO_API_URL']}/simple/price",

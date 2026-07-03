@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_29_053945) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_30_071621) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -61,12 +61,29 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_29_053945) do
     t.index ["portfolio_id"], name: "index_holdings_on_portfolio_id"
   end
 
+  create_table "jwt_denylist", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "exp", null: false
+    t.string "jti", null: false
+    t.datetime "updated_at", null: false
+    t.index ["jti"], name: "index_jwt_denylist_on_jti", unique: true
+  end
+
   create_table "portfolios", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_portfolios_on_user_id"
+  end
+
+  create_table "price_caches", force: :cascade do |t|
+    t.string "asset_type", null: false
+    t.datetime "created_at", null: false
+    t.decimal "price", precision: 15, scale: 4, null: false
+    t.string "symbol", null: false
+    t.datetime "updated_at", null: false
+    t.index ["symbol", "asset_type"], name: "index_price_caches_on_symbol_and_asset_type", unique: true
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -84,9 +101,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_29_053945) do
     t.datetime "created_at", null: false
     t.string "currency"
     t.string "email"
+    t.string "encrypted_password", default: "", null: false
     t.decimal "monthly_income"
     t.string "name"
+    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at"
+    t.string "reset_password_token"
     t.datetime "updated_at", null: false
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "alerts", "users"
