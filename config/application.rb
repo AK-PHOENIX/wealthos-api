@@ -27,10 +27,8 @@ module WealthosApi
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
-    config.paths.add 'app/api', eager_load: true
-    config.paths.add Rails.root.join('app/api').to_s, eager_load: true
-    config.eager_load_paths << Rails.root.join('app/api')
-
+    config.autoload_paths -= [Rails.root.join('app/api').to_s]
+    config.eager_load_paths -= [Rails.root.join('app/api').to_s]
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
