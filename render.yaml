@@ -20,7 +20,7 @@ services:
       - key: SECRET_KEY_BASE
         generateValue: true
       - key: FRONTEND_URL
-        value: https://wealthos-frontend.vercel.app
+        value: https://wealthos-frontend-brown.vercel.app
       - key: GEMINI_API_KEY
         sync: false
       - key: PORT
