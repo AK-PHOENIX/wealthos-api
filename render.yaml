@@ -24,7 +24,7 @@ services:
       - key: GEMINI_API_KEY
         sync: false
       - key: PORT
-        value: 10000
+        value: 3000
 
 databases:
   - name: wealthos-db
