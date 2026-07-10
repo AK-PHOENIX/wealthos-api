@@ -7,7 +7,7 @@ Rails.application.configure do
   config.enable_reloading = false
 
   # Eager load code on boot for better performance and memory savings (ignored by Rake tasks).
-  config.eager_load = true
+  config.eager_load = false
 
   config.force_ssl = false  # Render handles SSL
   config.log_level = :info
