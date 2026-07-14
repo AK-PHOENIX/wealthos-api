@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'admin/base'
 require_relative 'identity/base'
 require_relative 'market/base'
 require_relative 'ais/base'
@@ -25,6 +26,7 @@ module API
       content_type :json, 'application/json'
       default_format :json
 
+      mount API::V1::Admin::Base      => '/admin'
       mount API::V1::Identity::Base   => '/identity'
       mount API::V1::Market::Base     => '/market'
       mount API::V1::Ai::Base         => '/ai'
